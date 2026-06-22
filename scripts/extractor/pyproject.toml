@@ -1,0 +1,12 @@
+[project]
+name = "oseddl-extractor"
+version = "0.1.0"
+description = "AI extractor toolchain for open-source-deadlines"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.27.0",
+    "openai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "pyyaml>=6.0.0",
+]

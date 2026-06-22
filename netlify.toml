@@ -1,15 +1,17 @@
 # Netlify build configuration for open-source-deadlines.
 #
 # Build command and publish directory mirror the local `bun run build` flow.
-# The `ignore` directive skips builds when only files under `data/` change,
-# since runtime data is fetched remotely with revalidate:60 (see
-# lib/server/data-source.ts) and does not require a redeploy.
+# The `ignore` directive skips builds when only files under `data/` or
+# `scripts/` change. Runtime data is fetched remotely with revalidate:60 (see
+# lib/server/data-source.ts) and does not require a redeploy. The `scripts/`
+# directory hosts Python helpers (data validator, AI extractor) that are
+# unrelated to the front-end bundle.
 
 [build]
   command = "bun run build"
   publish = ".next"
   functions = "netlify/functions"
-  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- ':(exclude)data/'"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- ':(exclude)data/' ':(exclude)scripts/'"
 
 [build.environment]
   NODE_VERSION = "20"
